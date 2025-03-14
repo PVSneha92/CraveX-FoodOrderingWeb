@@ -7,9 +7,7 @@ export const userMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res
-        .status(401)
-        .json({ message: "Unauthorized: No Token Provided" });
+      return res.status(401).json({ message: "Unauthorized: No Token Provided" });
     }
 
     const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET);
