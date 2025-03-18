@@ -2,7 +2,7 @@
 import { cloudinaryInstance } from "../config/cloudinary.js";
 import{Restaurant} from "../models/restaurantModel.js"
 import bcrypt from "bcryptjs";
-import { generateToken } from "../utilities/token.js";
+import{createToken} from "../utils/token.js"
 
 export const addRestaurant = async (req, res) => {
   try {
@@ -25,7 +25,7 @@ export const addRestaurant = async (req, res) => {
     });
 
     await addRestaurant.save();
-    const token = generateToken(addRestaurant);
+    const token = createToken(addRestaurant);
     res.cookie("token", token, { httpOnly: true });
     res.status(201).json({ message: "Restaurant successfully Registered",addRestaurant });
   } catch (error) {
@@ -34,7 +34,7 @@ export const addRestaurant = async (req, res) => {
   }
 };
 
-export const loginRestaurant = async (req, res) => {
+ export const loginRestaurant = async (req, res) => {
   try {
     const { Email, Password } = req.body;
     const restaurant = await Restaurant.findOne({ Email });
@@ -48,9 +48,9 @@ export const loginRestaurant = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    const token = generateToken(restaurant);
+    const token = createToken(restaurant);
     res.cookie("token", token, { httpOnly: true });
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -59,13 +59,14 @@ export const loginRestaurant = async (req, res) => {
 export async function updateRestaurant(req, res) {
   try {
     const { restaurantId } = req.params;
-    const { Restaurant_name, Email, Phone_number,rating } = req.body;
+    const { Restaurant_name, Email, Phone_number,rating,isOpen } = req.body;
 
     const restaurant = await Restaurant.findById(restaurantId);
     if (Restaurant_name) restaurant.Restaurant_name = Restaurant_name;
     if (Email) restaurant.Email = Email;
     if (Phone_number) restaurant.Phone_number = Phone_number;
-    if (rating) restaurant.rating = rating;
+    if (rating) restaurant.Rating = rating;
+    if(isOpen) restaurant.isOpen = isOpen;
     if (req.file) {
       const Restaurant_ImageUri = await cloudinaryInstance.uploader.upload(req.file.path);
       restaurant.Restaurant_Image = Restaurant_ImageUri.url;
@@ -80,10 +81,10 @@ export async function updateRestaurant(req, res) {
   }
 }
 
-export async function getRestaurantByRestaurant_name(req,res) {
+export async function getRestaurantByName(req,res) {
   try {
-    const {Restaurant_name} = req.params
-    const restaurant = await Restaurant.findOne({Restaurant_name:{$regex:Restaurant_name,$options:"i" }}).select("-Password")
+    const {restaurantName} = req.params
+    const restaurant = await Restaurant.findOne({Restaurant_name:{$regex:restaurantName,$options:"i" }}).select("-Password")
     if(restaurant.length=== 0)  {
 return res.status(404).json({message:"Restaurant Not Found"})
     }
@@ -109,7 +110,7 @@ export async function getRestaurantById(req,res) {
     const {restaurantId} = req.params
     const findRestaurant = await Restaurant.findById(restaurantId)
     if(!findRestaurant){
-return res.status(404).json({message:"No Restaurant found"})
+return res.status(404).json({message:"Restaurant not found"})
     }
     res.status(200).json({message: "Restaurant Fetched Successfully",findRestaurant})
   } catch (error) {
@@ -141,4 +142,5 @@ export async function logout(req,res) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-}
+} 
+

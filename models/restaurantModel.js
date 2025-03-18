@@ -1,24 +1,27 @@
 import mongoose from "mongoose";
 
 const {Schema} = mongoose
+
+const menuItemSchema = new Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  description: { type: String },
+  image: { type: String },
+  category: { type: String }, // Example: "Beverages", "Main Course", etc.
+});
+
 const restaurantSchema = new Schema({
-    Restaurant_id : {type : String},
     Restaurant_name : {type : String, required:true, maxlength:25},
-    Address : {type:String,required:true},
     Phone_number : {type:Number, required:true, match: [/^\d{10}$/, "Invalid phone number. It must be exactly 10 digits."] },
     Email : {type:String, required:true, unique:true},
     Password: { type: String, required: true },
-    Operating_hours : {type:Number, required:true, maxlength:10},
+    isVerified: { type: Boolean, default: false },
+    isOpen : {type:Boolean, required:true,default:false},
     Restaurant_Image: { type: String },
     Rating: { type: Number, min: 1, max: 5 },
-    Associated_seller: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-},
-{ timestamps: true }
-
+    menu: [menuItemSchema], 
+    createdAt: { type: Date, default: Date.now },
+}
 );
 
 

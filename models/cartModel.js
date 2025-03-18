@@ -8,14 +8,14 @@ const cartSchema = new Schema({
         ref: "User",
         required: true
     },
-    Restaurant: {
+    Restaurant_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Restaurant",
         required: true
     },
     Items: [
         {
-            Menu_item: {
+            Menu_id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Menu",
                 required: true
@@ -53,7 +53,7 @@ const cartSchema = new Schema({
 }, { timestamps: true });
 
 cartSchema.method.calulateTotalPrice = function(){
-    this.totalPrice = this.items.reduce((total,items)=> total + items.price,0);
+    this.Cart_total = this.items.reduce((total,items)=> total + items.price,0);
   }
 
-export const Cart = mongoose.model("Cart", cartSchema);
+  export default mongoose.model("Cart", cartSchema);
