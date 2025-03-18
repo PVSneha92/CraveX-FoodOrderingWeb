@@ -7,6 +7,7 @@ const restaurantSchema = new Schema({
     Address : {type:String,required:true},
     Phone_number : {type:Number, required:true, match: [/^\d{10}$/, "Invalid phone number. It must be exactly 10 digits."] },
     Email : {type:String, required:true, unique:true},
+    Password: { type: String, required: true },
     Operating_hours : {type:Number, required:true, maxlength:10},
     Restaurant_Image: { type: String },
     Rating: { type: Number, min: 1, max: 5 },

@@ -99,13 +99,13 @@ export async function fetchRole(req,res) {
 
 export async function Profile(req,res) {
   try {
-    const user = await Customer.findById(req.customers.id).select("role")
+    const user = await Customer.findById(req.customers.id).select("-Password")
     if (!user){
       return res.status(404).json({message:"User not Found"})
     }
     res.status(200).json({message:"User found",user})
   } catch (error) {
-    console.error("error while fetching role",error)
+    console.error("error while fetching Data",error)
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }
