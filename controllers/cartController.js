@@ -57,7 +57,7 @@ export async function addToCart(req, res) {
 
 export async function addQuantity(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.customers.id;
     const { foodId, action } = req.body;
     if (!["increment", "decrement"].includes(action)) {
       return res
@@ -104,7 +104,7 @@ export async function addQuantity(req, res) {
 
 export async function viewCart(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.customers.id;
     const cart = await Cart.findOne({ userId, cartStatus: { $ne: "ordered" } });
     if (!cart) {
       return res.status(404).json({ message: "Cart is empty" });
@@ -126,7 +126,7 @@ export async function viewCart(req, res) {
 
 export async function deleteCartItem(req, res) {
   try {
-    const userId = req.user.id;
+    const userId = req.customers.id;
     const { foodId } = req.params;
     const cart = await Cart.findOne({ userId, cartStatus: { $ne: "ordered" } });
     if (!cart) {

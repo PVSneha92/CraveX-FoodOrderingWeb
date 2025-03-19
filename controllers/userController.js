@@ -17,6 +17,15 @@ export async function signUp(req, res) {
     
     const hashedPassword = bcrypt.hashSync(Password, 10);
     
+    const newUser = new Customer({
+      Customer_name,
+      Email,
+      Phone_number,
+      Password: hashedPassword,
+      Customer_pic,
+      Role,
+    });
+
     await newUser.save();
     const token = createToken(newUser);
     res.cookie("token", token, { httpOnly: true });

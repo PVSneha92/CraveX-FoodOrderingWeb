@@ -21,7 +21,8 @@ const customerSchema = new mongoose.Schema({
   },
   Customer_pic: {
     type: String,
-    required: false,
+    default:
+      "https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756875/Food%20Order%20Website/noeuwugmxrhszkjcq2no.png",
   },
   Role: {
     type: String,
