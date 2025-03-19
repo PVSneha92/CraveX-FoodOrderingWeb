@@ -14,7 +14,7 @@ const razorpay = new RazorPay({
 
 export const createPayment = async (req, res) => {
   try {
-    const user = req.user.id;
+    const user = req.customers.id;
     const { orderId } = req.params;
 
     const order = await Order.findById(orderId);

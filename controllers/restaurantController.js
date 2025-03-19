@@ -2,7 +2,7 @@
 import { cloudinaryInstance } from "../config/cloudinary.js";
 import{Restaurant} from "../models/restaurantModel.js"
 import bcrypt from "bcryptjs";
-import{createToken} from "../utils/token.js"
+import{createTokenForRestaurant} from "../utils/token.js"
 
 export const addRestaurant = async (req, res) => {
   try {
@@ -25,7 +25,7 @@ export const addRestaurant = async (req, res) => {
     });
 
     await addRestaurant.save();
-    const token = createToken(addRestaurant);
+    const token = createTokenForRestaurant(addRestaurant);
     res.cookie("token", token, { httpOnly: true });
     res.status(201).json({ message: "Restaurant successfully Registered",addRestaurant });
   } catch (error) {
@@ -48,7 +48,7 @@ export const addRestaurant = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    const token = createToken(restaurant);
+    const token = createTokenForRestaurant(restaurant);
     res.cookie("token", token, { httpOnly: true });
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
@@ -58,7 +58,7 @@ export const addRestaurant = async (req, res) => {
 
 export async function updateRestaurant(req, res) {
   try {
-    const { restaurantId } = req.params;
+    const  restaurantId  = req.restaurant.id;
     const { Restaurant_name, Email, Phone_number,rating,isOpen } = req.body;
 
     const restaurant = await Restaurant.findById(restaurantId);
@@ -121,7 +121,7 @@ return res.status(404).json({message:"Restaurant not found"})
 
 export async function deleteRestaurant(req,res) {
   try {
-    const {restaurantId} = req.params
+    const restaurantId = req.restaurant.id
 const findRestaurant = await Restaurant.findById(restaurantId)
     if(!findRestaurant){
 return res.status(404).json({message:"No Restaurant found"})
