@@ -119,7 +119,7 @@ export const getMenuItemById = async (req, res) => {
     if (!restaurant) {
       return res.status(404).json({ message: "Restaurant not found" });
     }
-    const menuItem = restaurant.menu.id(menuItemId).populated("Restaurant");
+    const menuItem = restaurant?.menu.id(menuItemId);
     if (!menuItem) {
       return res.status(404).json({ message: "Menu item not found" });
     }

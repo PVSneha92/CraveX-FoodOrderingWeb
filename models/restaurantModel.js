@@ -10,6 +10,8 @@ const menuItemSchema = new Schema({
   category: { type: String }, // Example: "Beverages", "Main Course", etc.
 });
 
+export const MenuItem = mongoose.model("MenuItem", menuItemSchema);
+
 const restaurantSchema = new Schema({
     Restaurant_name : {type : String, required:true, maxlength:25},
     Phone_number : {type:Number, required:true, match: [/^\d{10}$/, "Invalid phone number. It must be exactly 10 digits."] },
