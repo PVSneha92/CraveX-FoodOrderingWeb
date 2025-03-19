@@ -24,7 +24,7 @@ export const userMiddleware = async (req, res, next) => {
 
 export const roleMiddleware = (...roles) => {
   return (req, res, next) => {
-    if (!req.user || !roles.includes(req.user.role)) {
+    if (!req.customers || !roles.includes(req.customers.role)) {
       return res.status(403).json({ message: "Access Denied" }); // Use `return` to stop execution
     }
     next();

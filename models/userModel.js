@@ -26,7 +26,7 @@ const customerSchema = new mongoose.Schema({
   },
   Role: {
     type: String,
-    enum : ["User","Admin","Seller"],
+    enum : ["User","Admin"],
     default: "User"
   },
   createdAt : {type:Date,default:Date.now}

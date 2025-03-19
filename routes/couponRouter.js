@@ -4,6 +4,6 @@ import {userMiddleware,roleMiddleware } from '../middlewares/userMiddleware.js'
 
 const router = express.Router()
 
-router.post("/create",userMiddleware,roleMiddleware("admin"),createCoupon)
+router.post("/create",userMiddleware,roleMiddleware("Admin"),createCoupon)
 
 export const couponRouter = router

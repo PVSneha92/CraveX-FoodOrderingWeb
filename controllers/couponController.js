@@ -3,7 +3,7 @@ import { Customer } from "../models/userModel.js";
 
 export async function createCoupon(req, res) {
     try {
-        const user = await Customer.findById(req.user.id);
+        const user = await Customer.findById(req.customers.id);
         if (!user) {
             return res.status(404).json({ message: "User Not Found" });
         }

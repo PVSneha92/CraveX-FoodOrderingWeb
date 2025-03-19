@@ -7,14 +7,12 @@ import { couponRouter } from "./couponRouter.js"
 import { menuItemRouter } from "./menuItemRouter.js"
 import { paymentRouter } from "./paymentRouter.js"
 import {restaurantRouter} from "./restaurantRouter.js"
-import { sellerRouter } from "./sellerRouter.js"
 import {userRouter} from "./userRouter.js"
 
 const router = express.Router();
 
 router.use("/user", userRouter);
 router.use("/admin", adminRouter);
-router.use("/seller", sellerRouter);
 router.use("/address", addressRouter);
 router.use("/cart", cartRouter);
 router.use("/coupon", couponRouter);
