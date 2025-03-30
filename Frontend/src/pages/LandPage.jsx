@@ -50,7 +50,24 @@ export default function LandPage() {
             </h2>
             <div className="w-20 h-1 bg-amber-300 mx-auto"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+  <div>
+    <img src="/dish1.jpg" alt="Pizza" className="w-40 h-40 rounded-full object-cover shadow-md hover:scale-105 transition mx-auto" />
+    <p className="mt-2 text-lg font-semibold text-gray-800">Pizza</p>
+  </div>
+  <div>
+    <img src="/dish2.jpeg" alt="Biriyani" className="w-40 h-40 rounded-full object-cover shadow-md hover:scale-105 transition mx-auto" />
+    <p className="mt-2 text-lg font-semibold text-gray-800">Biriyani</p>
+  </div>
+  <div>
+    <img src="/dish3.jpeg" alt="Burger" className="w-40 h-40 rounded-full object-cover shadow-md hover:scale-105 transition mx-auto" />
+    <p className="mt-2 text-lg font-semibold text-gray-800">Burger</p>
+  </div>
+  <div>
+    <img src="/dish4.jpeg" alt="Shawarma" className="w-40 h-40 rounded-full object-cover shadow-md hover:scale-105 transition mx-auto" />
+    <p className="mt-2 text-lg font-semibold text-gray-800">Shawarma</p>
+  </div>
+</div>
 
           <div className="text-center mt-12">
             <button className="px-8 py-3 bg-gray-800 text-amber-300 font-bold rounded-full hover:bg-gray-700 transition duration-200 inline-block">

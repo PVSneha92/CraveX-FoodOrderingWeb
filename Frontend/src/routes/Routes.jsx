@@ -9,9 +9,14 @@ import AboutPage from "../pages/AboutPage";
 import ProtectRoutes from "./ProtectRoutes";
 import ProfilePage from "../pages/ProfilePage";
 import ContactPage from "../pages/ContactPage";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 import RestaurantPage from "../pages/RestaurantPage";
 
 const Router = createBrowserRouter([
+  {
+    path: "admin", 
+    element: <AdminDashboard /> 
+  },
   {
     path: "/",
     element: <UserLayout />,

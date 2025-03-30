@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-amber-300">Cravex</h3>
+            <h3 className="text-xl font-bold text-amber-300">CraveX</h3>
             <p className="text-gray-300">
               Delivering exceptional experiences through quality products and
               outstanding service.
@@ -114,7 +114,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-6 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Cravex. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} CraveX. All rights reserved.</p>
         </div>
       </div>
     </footer>
