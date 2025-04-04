@@ -9,7 +9,11 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL, process.env.ADMIN_URL], // Allow requests from these origins
+    origin: [
+      process.env.CLIENT_URL,
+      process.env.ADMIN_URL,
+      process.env.RESTAURANT_URL,
+    ],
     credentials: true, // Allow cookies and credentials
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allow these HTTP methods
     allowedHeaders: [

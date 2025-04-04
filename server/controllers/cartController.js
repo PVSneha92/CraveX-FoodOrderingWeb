@@ -3,7 +3,7 @@ import { Restaurant } from "../models/restaurantModel.js";
 
 export async function addToCart(req, res) {
   try {
-    const userId = req.user.id;
+    const user = req.user.id;
     const { foodId, restaurantId, quantity } = req.body;
     const restaurant = await Restaurant.findById(restaurantId);
     if (!restaurant) {
@@ -14,7 +14,10 @@ export async function addToCart(req, res) {
       return res.status(404).json({ message: "Menu item not found" });
     }
     const itemPrice = menuItem.price * quantity;
-    let cart = await Cart.findOne({ userId, cartStatus: { $ne: "ordered" } });
+    let cart = await Cart.findOne({
+      userId: user,
+      cartStatus: { $ne: "ordered" },
+    });
     if (cart && cart.restaurantId.toString() !== restaurantId) {
       return res.status(409).json({
         message: "Item from different restaurant is already added to cart",
@@ -22,7 +25,7 @@ export async function addToCart(req, res) {
     }
     if (!cart) {
       cart = new Cart({
-        userId,
+        userId: user,
         restaurantId,
         items: [],
         totalPrice: 0,
@@ -38,10 +41,10 @@ export async function addToCart(req, res) {
     } else {
       cart.items.push({
         foodId,
-        foodName:menuItem.name,
+        foodName: menuItem.name,
         quantity,
         totalItemPrice: itemPrice,
-        foodImage:menuItem.image,
+        foodImage: menuItem.image,
       });
     }
     cart.totalPrice = cart.items.reduce(
@@ -154,6 +157,58 @@ export async function deleteCartItem(req, res) {
       return res.status(404).json({ message: "Item not found in cart" });
     }
   } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+export async function removeSingleItemFromCart(req, res) {
+  try {
+    const userId = req.user.id;
+    const { foodId } = req.params;
+
+    // Find the cart for the user that hasn't been ordered yet
+    const cart = await Cart.findOne({ userId, cartStatus: { $ne: "ordered" } });
+
+    // If no cart is found, return an error
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    // Find the item in the cart using the foodId
+    const itemIndex = cart.items.findIndex(
+      (item) => item.foodId.toString() === foodId
+    );
+
+    // If the item doesn't exist in the cart, return an error
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: "Item not found in cart" });
+    }
+
+    // Find the menu item from the restaurant to adjust the price
+    const restaurant = await Restaurant.findById(cart.restaurantId);
+    const menuItem = restaurant?.menu.id(foodId);
+
+    // If menuItem doesn't exist, return an error
+    if (!menuItem) {
+      return res.status(404).json({ message: "Menu item not found" });
+    }
+
+    // Get the item details
+    const item = cart.items[itemIndex];
+
+    // Subtract the price of the item being removed
+    cart.totalPrice -= item.totalItemPrice;
+    cart.finalPrice = cart.totalPrice;
+
+    // Remove the item from the cart
+    cart.items.splice(itemIndex, 1);
+
+    // Save the updated cart
+    await cart.save();
+
+    // Return the updated cart with the item removed
+    return res.status(200).json({ message: "Item removed from cart", cart });
+  } catch (error) {
+    // If any error occurs, return a server error
     return res.status(500).json({ message: error.message });
   }
 }

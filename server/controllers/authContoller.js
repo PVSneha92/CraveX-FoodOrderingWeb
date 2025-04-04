@@ -34,25 +34,36 @@ export async function signUp(req, res) {
 export async function login(req, res) {
   try {
     const { email, password } = req.body;
+
     if (!email || !password) {
-      return res.status(404).json({ message: "Fill All Required Fields" });
+      return res.status(400).json({ message: "Fill All Required Fields" });
     }
-    const user = await User.findOne({ email: email });
+
+    // Fetch user with password field
+    const user = await User.findOne({ email }).select("email password role"); // Ensure the password field is included
+
     if (!user) {
       return res.status(404).json({ message: "User Not Found" });
     }
+
+    // Compare password
     const isPasswordMatch = bcrypt.compareSync(password, user.password);
     if (!isPasswordMatch) {
       return res.status(400).json({ message: "Wrong Password" });
     }
+
+    // Generate token
     const token = generateToken(user);
+
+    // Set cookie
     res.cookie("token", token, {
       httpOnly: true, // Prevents access via JavaScript (XSS protection)
       secure: true, // Works only on HTTPS (important in production)
       sameSite: "None", // Allows cross-origin requests
       path: "/", // Available for all routes
     });
-    res.status(200).json({ message: "Logged in Successfully", token });
+
+    res.status(200).json({ message: "Logged in Successfully", user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
