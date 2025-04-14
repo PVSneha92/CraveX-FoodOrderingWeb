@@ -40,7 +40,7 @@ const db = connectDb;
 db();
 
 app.listen(port, () =>
-  console.log(Server running on port: http://localhost:${port})
+  console.log(`Server running on port: http://localhost:${port}`)
 );
 
 // Handle 404 errors
