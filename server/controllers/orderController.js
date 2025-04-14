@@ -93,7 +93,7 @@ export const getOrderById = async (req, res) => {
 
 export const updateOrderUser = async (req, res) => {
   try {
-    const user = req.user.id;
+    const user = req.restaurant.id;
     const { orderId } = req.params;
     const { coupon, status, deliveryAddress } = req.body;
 
@@ -163,7 +163,7 @@ export const updateOrderStatus = async (req, res) => {
 
 export const getAllRestaurantOrders = async (req, res) => {
   try {
-    const { restaurantId } = req.params;
+    const restaurantId = req.restaurant.id;
     const orders = await Order.find({
       restaurant: restaurantId,
       status: { $ne: "cancelled" },

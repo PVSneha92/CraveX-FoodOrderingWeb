@@ -6,7 +6,7 @@ const ProtectRoutes = () => {
   const { isUserAuth } = useSelector((state) => state.user);
   const navigate = useNavigate();
   if (!isUserAuth) {
-    navigate("/admin/login");
+    navigate("/login");
   }
   return isUserAuth && <Outlet />;
 };

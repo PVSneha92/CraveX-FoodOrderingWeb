@@ -1,5 +1,7 @@
 import express from "express";
 import {
+  deleteUsers,
+  getAllUsers,
   getProfile,
   getRole,
   login,
@@ -19,6 +21,12 @@ router.post("/signup", signUp);
 router.get("/profile", authMiddleware, getProfile);
 router.put("/update", authMiddleware, profileUpdate);
 router.get("/profile/role", authMiddleware, getRole);
-router.post("/logout",authMiddleware,logout)
-
+router.post("/logout", authMiddleware, logout);
+router.get("/users", authMiddleware, roleMiddleware("admin"), getAllUsers);
+router.delete(
+  "/delete/:userId",
+  authMiddleware,
+  roleMiddleware("admin"),
+  deleteUsers
+);
 export const authRouter = router;

@@ -146,3 +146,32 @@ export async function checkUser(req, res, next) {
       .json({ message: error.message || "Internal server error" });
   }
 }
+
+export async function deleteUsers(req, res) {
+  try {
+    const { userId } = req.params;
+    const findUser = await User.findById(userId);
+    if (!findUser) {
+      return res.status(404).json({ message: "No Restaurant found" });
+    }
+    const userDel = await User.findByIdAndDelete(userId);
+    res
+      .status(200)
+      .json({ message: "Restaurat Have Been Deleted Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export async function getAllUsers(req, res) {
+  try {
+    const users = await User.find({ role: { $ne: "admin" } }).select(
+      "-password"
+    );
+    res.status(200).json({ message: "fetched all user Successfully", users });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}

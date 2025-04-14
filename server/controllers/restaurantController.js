@@ -17,9 +17,11 @@ export const registerRestaurant = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: "No image file uploaded" });
     }
-    const allowedImageTypes = ['image/jpeg', 'image/png'];
+    const allowedImageTypes = ["image/jpeg", "image/png"];
     if (!allowedImageTypes.includes(req.file.mimetype)) {
-      return res.status(400).json({ message: "Invalid image type. Only JPG and PNG are allowed." });
+      return res
+        .status(400)
+        .json({ message: "Invalid image type. Only JPG and PNG are allowed." });
     }
     const imageUri = await cloudinaryInstance.uploader.upload(req.file.path);
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,7 +32,7 @@ export const registerRestaurant = async (req, res) => {
       phone,
       password: hashedPassword,
       image: imageUri.url,
-      contactEmail
+      contactEmail,
     });
 
     // Save the new restaurant to the database
@@ -43,8 +45,9 @@ export const registerRestaurant = async (req, res) => {
     res.cookie("token", token, { httpOnly: false });
 
     // Respond with success
-    res.status(201).json({ message: "Restaurant registered successfully", newRestaurant });
-
+    res
+      .status(201)
+      .json({ message: "Restaurant registered successfully", newRestaurant });
   } catch (error) {
     console.log(error); // Log the error for debugging purposes
     res.status(500).json({ message: "Server error", error: error.message });
@@ -59,7 +62,9 @@ export const loginRestaurant = async (req, res) => {
       return res.status(404).json({ message: "Restaurant not found" });
     }
     if (!restaurant.isVerified) {
-      return res.status(403).json({ message: "Restaurant is not verified. Please wait for admin approval." });
+      return res.status(403).json({
+        message: "Restaurant is not verified. Please wait for admin approval.",
+      });
     }
     const isMatch = await bcrypt.compare(password, restaurant.password);
     if (!isMatch) {
@@ -75,15 +80,16 @@ export const loginRestaurant = async (req, res) => {
 
 export async function updateRestaurant(req, res) {
   try {
-    const restaurantId  = req.restaurant.id
-    console.log(restaurantId)
-    const { name, email, phone,rating } = req.body;
+    const restaurantId = req.restaurant.id;
+    console.log(restaurantId);
+    const { name, email, phone, rating, isOpen } = req.body;
 
     const restaurant = await Restaurant.findById(restaurantId);
     if (name) restaurant.name = name;
     if (email) restaurant.email = email;
     if (phone) restaurant.phone = phone;
     if (rating) restaurant.rating = rating;
+    if (isOpen !== undefined) restaurant.isOpen = isOpen;
     if (req.file) {
       const imageUri = await cloudinaryInstance.uploader.upload(req.file.path);
       restaurant.image = imageUri.url;
@@ -98,63 +104,119 @@ export async function updateRestaurant(req, res) {
   }
 }
 
-export async function getRestaurantByName(req,res) {
+export async function getRestaurantByName(req, res) {
   try {
-    const {name} = req.params
-    const restaurant = await Restaurant.findOne({name:{$regex:name,$options:"i" }}).select("-password")
-    if(restaurant.length=== 0)  {
-return res.status(404).json({message:"Restaurant Not Found"})
+    const { name } = req.params;
+    const restaurant = await Restaurant.findOne({
+      name: { $regex: name, $options: "i" },
+    }).select("-password");
+    if (restaurant.length === 0) {
+      return res.status(404).json({ message: "Restaurant Not Found" });
     }
-    res.status(200).json({message:"Restaurant Found", restaurant})
+    res.status(200).json({ message: "Restaurant Found", restaurant });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-export async function getAllRestaurant(req,res) {
+export async function getAllRestaurant(req, res) {
   try {
-    const restaurant = await Restaurant.find()
-    res.status(200).json({message:"All Restaurant Are Fetched", restaurant})
+    const restaurant = await Restaurant.find({ isVerified: { $ne: false } });
+    res.status(200).json({ message: "All Restaurant Are Fetched", restaurant });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-export async function getRestaurantById(req,res) {
+export async function getUnverified(req, res) {
   try {
-    const {restaurantId} = req.params
-    const findRestaurant = await Restaurant.findById(restaurantId)
-    if(!findRestaurant){
-return res.status(404).json({message:"No Restaurant found"})
-    }
-    res.status(200).json({message: "Restaurant Fetched Successfully",findRestaurant})
+    const restaurant = await Restaurant.find({ isVerified: false });
+    res.status(200).json({ message: "All Restaurant Are Fetched", restaurant });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });  
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-export async function deleteRestaurant(req,res) {
+export async function getRestaurantById(req, res) {
   try {
-    const {restaurantId} = req.params
-const findRestaurant = await Restaurant.findById(restaurantId)
-    if(!findRestaurant){
-return res.status(404).json({message:"No Restaurant found"})
+    const { restaurantId } = req.params;
+    const findRestaurant = await Restaurant.findById(restaurantId);
+    if (!findRestaurant) {
+      return res.status(404).json({ message: "No Restaurant found" });
     }
-const restaurantDel = await Restaurant.findByIdAndDelete(restaurantId)
-res.status(200).json({message:"Restaurat Have Been Deleted Successfully"})
+    res
+      .status(200)
+      .json({ message: "Restaurant Fetched Successfully", findRestaurant });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });  
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
-export async function logout(req,res) {
+export async function deleteRestaurant(req, res) {
   try {
-    res.clearCookie("token")
-    res.status(200).json({message:"Logged Out Succesfully"})
+    const { restaurantId } = req.params;
+    const findRestaurant = await Restaurant.findById(restaurantId);
+    if (!findRestaurant) {
+      return res.status(404).json({ message: "No Restaurant found" });
+    }
+    const restaurantDel = await Restaurant.findByIdAndDelete(restaurantId);
+    res
+      .status(200)
+      .json({ message: "Restaurat Have Been Deleted Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+export async function removeRestaurant(req, res) {
+  try {
+    const restaurantId = req.restaurant.id;
+    const findRestaurant = await Restaurant.findById(restaurantId);
+    if (!findRestaurant) {
+      return res.status(404).json({ message: "No Restaurant found" });
+    }
+    const restaurantDel = await Restaurant.findByIdAndDelete(restaurantId);
+    res
+      .status(200)
+      .json({ message: "Restaurat Have Been Deleted Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export async function logout(req, res) {
+  try {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logged Out Succesfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+export async function checkRestaurant(req, res, next) {
+  try {
+    res.json({ message: "user autherized" });
+  } catch (error) {
+    res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Internal server error" });
+  }
+}
+export async function getRestaurantProfile(req, res) {
+  try {
+    const restaurantId = req.restaurant.id;
+    const findRestaurant = await Restaurant.findById(restaurantId).select(
+      "-password"
+    );
+    if (!findRestaurant) {
+      return res.status(404).json({ message: "No Restaurant found" });
+    }
+    res.status(200).json({ message: "Restaurat Have found", findRestaurant });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
