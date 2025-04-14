@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "../layout/AdminLayout.jsx";
-import ErrorPage from "../pages/admin/ ErrorPage.jsx"; // 🔧 Fixed spacing in import path
+import ErrorPage from "../pages/admin/ErrorPage.jsx" // 🔧 Fixed spacing in import path
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import LoginPage from "../pages/admin/LoginPage.jsx";
 import ProtectRoutes from "./ProtectRoutes.jsx";
