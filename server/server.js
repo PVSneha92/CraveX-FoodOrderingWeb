@@ -7,33 +7,30 @@ import { apiRouter } from "./routes/version_1/index.js";
 const app = express();
 const port = process.env.PORT;
 
+const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL];
+
+// Configure CORS middleware
 app.use(
   cors({
-    origin: [
-      process.env.CLIENT_URL,
-      process.env.ADMIN_URL,
-      process.env.RESTAURANT_URL,
-    ],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true, // Allow cookies and credentials
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allow these HTTP methods
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Allowed HTTP methods
     allowedHeaders: [
       "Content-Type",
       "Authorization",
       "X-Requested-With",
       "Accept",
-    ], // Allow these headers
+    ], // Allowed headers
   })
 );
-
-// Handle preflight requests
-app.options("*", cors());
-
-// Verify environment variables
-if (!process.env.CLIENT_URL || !process.env.ADMIN_URL) {
-  console.warn(
-    "CLIENT_URL or ADMIN_URL is not set in the environment variables."
-  );
-}
 app.use(express.json());
 app.use(cookieParser());
 
@@ -43,7 +40,7 @@ const db = connectDb;
 db();
 
 app.listen(port, () =>
-  console.log(`Server running on port: http://localhost:${port}`)
+  console.log(Server running on port: http://localhost:${port})
 );
 
 // Handle 404 errors
