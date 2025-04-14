@@ -6,11 +6,11 @@ const ProtectRoutes = () => {
   const navigate = useNavigate();
   const { isUserAuth } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (!isUserAuth) {
-      navigate("/");
-    }
-  }, [isUserAuth, navigate]);
+  // // useEffect(() => {
+  // //   if (!isUserAuth) {
+  // //     navigate("/");
+  // //   }
+  // }, [isUserAuth, navigate]);
 
   return isUserAuth ? <Outlet /> : null;
 };
