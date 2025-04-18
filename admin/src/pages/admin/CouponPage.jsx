@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../../config/axiosInstance"; // make sure baseURL is set
+import axiosInstance from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 
 const CouponPage = () => {
@@ -19,7 +19,7 @@ const CouponPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/admin/coupons", couponData);
+      const response = await axiosInstance.post("/coupon/create", couponData);
       toast.success(response.data.message);
       setCouponData({
         code: "",
