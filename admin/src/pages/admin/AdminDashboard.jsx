@@ -105,6 +105,13 @@ const AdminDashboard = () => {
           >
             <LiaRupeeSignSolid size={20} /> Payments
           </Link>
+          <Link
+            to="/admin/coupon"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 hover:text-amber-300 transition-colors"
+            onClick={() => isMobile && setSidebarOpen(false)}
+          >
+            <FiCheck size={20} /> Coupon
+          </Link>
         </nav>
 
         <button

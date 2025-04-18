@@ -18,6 +18,7 @@ import Menu from "../components/restaurant/Menu.jsx";
 import Order from "../components/restaurant/Order.jsx";
 import Payment from "../components/restaurant/Payment.jsx";
 import Restaurant from "../components/restaurant/Restaurant.jsx";
+import CouponPage from "../pages/admin/CouponPage.jsx"
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -89,6 +90,10 @@ const Route = createBrowserRouter([
               {
                 path: "all/payments", // /dashboard/restaurants
                 element: <AllPaymentsPage />,
+              },
+              {
+                path: "coupon", // /dashboard/restaurants
+                element: <CouponPage/>,
               },
             ],
           },
