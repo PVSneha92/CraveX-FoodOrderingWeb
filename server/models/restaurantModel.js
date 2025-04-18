@@ -35,7 +35,7 @@ const restaurantSchema = new Schema({
   },
   password: { type: String, required: true },
   image: { type: String },
-  isVerified: { type: Boolean, default: false },
+  isVerified: { type: Boolean, default: true },
   isOpen: { type: Boolean, default: true },
   rating: { type: Number, min: 0, max: 5, default: 0 },
   menu: [menuItemSchema],
