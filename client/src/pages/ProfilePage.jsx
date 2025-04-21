@@ -38,14 +38,15 @@ const AddressForm = ({ address, onSave, onCancel }) => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 mt-6">
-      <h3 className="text-xl font-medium mb-4 text-white">
+    <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 mt-6 shadow-lg transition-all duration-300 transform hover:shadow-xl">
+      <h3 className="text-xl font-medium mb-4 text-white flex items-center">
+        <FiMapPin className="mr-2 text-amber-400" />
         {address ? "Edit Address" : "Add New Address"}
       </h3>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">
+          <div className="space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
               Full Name
             </label>
             <input
@@ -53,13 +54,13 @@ const AddressForm = ({ address, onSave, onCancel }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter your full name"
             />
           </div>
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">
+          <div className="space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
               Phone Number
             </label>
             <input
@@ -67,13 +68,13 @@ const AddressForm = ({ address, onSave, onCancel }) => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter phone number"
             />
           </div>
-          <div className="md:col-span-2">
-            <label className="block text-gray-300 text-sm mb-1">
+          <div className="md:col-span-2 space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
               House/Flat No.
             </label>
             <input
@@ -81,13 +82,13 @@ const AddressForm = ({ address, onSave, onCancel }) => {
               name="houseName"
               value={formData.houseName}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter house/flat number"
             />
           </div>
-          <div className="md:col-span-2">
-            <label className="block text-gray-300 text-sm mb-1">
+          <div className="md:col-span-2 space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
               Street Address
             </label>
             <input
@@ -95,54 +96,62 @@ const AddressForm = ({ address, onSave, onCancel }) => {
               name="streetName"
               value={formData.streetName}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter street address"
             />
           </div>
-          <div className="md:col-span-2">
-            <label className="block text-gray-300 text-sm mb-1">Landmark</label>
+          <div className="md:col-span-2 space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
+              Landmark
+            </label>
             <input
               type="text"
               name="landmark"
               value={formData.landmark}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               placeholder="Nearby landmark (optional)"
             />
           </div>
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">City</label>
+          <div className="space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
+              City
+            </label>
             <input
               type="text"
               name="city"
               value={formData.city}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter city"
             />
           </div>
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">State</label>
+          <div className="space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
+              State
+            </label>
             <input
               type="text"
               name="state"
               value={formData.state}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter state"
             />
           </div>
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">PIN Code</label>
+          <div className="space-y-1">
+            <label className="block text-gray-300 text-sm font-medium mb-1">
+              PIN Code
+            </label>
             <input
               type="text"
               name="pincode"
               value={formData.pincode}
               onChange={handleChange}
-              className="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:border-amber-500"
+              className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/50 transition"
               required
               placeholder="Enter PIN code"
             />
@@ -152,13 +161,13 @@ const AddressForm = ({ address, onSave, onCancel }) => {
           <button
             type="button"
             onClick={onCancel}
-            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded transition"
+            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-5 py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded transition"
+            className="flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white px-5 py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
           >
             <FiSave /> Save Address
           </button>
@@ -265,20 +274,28 @@ const ProfilePage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <p>Loading profile...</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500 mx-auto mb-4"></div>
+          <p className="text-lg font-medium">Loading your profile...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-400 mb-4">Error loading profile</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex items-center justify-center">
+        <div className="text-center max-w-md p-6 bg-gray-800 rounded-xl shadow-lg">
+          <p className="text-red-400 mb-4 text-lg font-medium">
+            Error loading profile
+          </p>
+          <p className="text-gray-300 mb-6">
+            We couldn't load your profile information. Please try again.
+          </p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-amber-500 text-white px-4 py-2 rounded-lg"
+            className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
           >
             Try Again
           </button>
@@ -289,8 +306,13 @@ const ProfilePage = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <p>No user data found</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex items-center justify-center">
+        <div className="text-center max-w-md p-6 bg-gray-800 rounded-xl shadow-lg">
+          <p className="text-lg font-medium mb-4">No user data found</p>
+          <p className="text-gray-300 mb-6">
+            Please sign in to view your profile.
+          </p>
+        </div>
       </div>
     );
   }
@@ -302,28 +324,31 @@ const ProfilePage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        {/* Profile Card */}
+        <div className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">
           {/* Profile Header */}
-          <div className="bg-gray-700 p-6 flex flex-col md:flex-row items-center gap-6">
-            <div className="w-24 h-24 rounded-full bg-gray-600 overflow-hidden border-2 border-amber-400">
+          <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-24 h-24 rounded-full bg-gray-600 overflow-hidden border-4 border-amber-400/80 shadow-lg">
               <img
-                src={user.profilePic}
+                src={user.profilePic || "https://via.placeholder.com/150"}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="text-center md:text-left">
-              <h1 className="text-2xl font-bold">{user.name}</h1>
-              <div className="flex items-center text-gray-300 gap-1">
-                <FiClock className="text-sm" />
-                <span className="text-sm">Member since {joinDate}</span>
+              <h1 className="text-2xl font-bold text-white">{user.name}</h1>
+              <div className="flex items-center justify-center md:justify-start text-gray-300 gap-1 mt-1">
+                <FiClock className="text-sm text-amber-400" />
+                <span className="text-sm">
+                  Member since {joinDate}
+                </span>
               </div>
             </div>
             <button
               onClick={isEditing ? handleSave : () => setIsEditing(true)}
-              className="ml-auto bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
+              className="ml-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-white px-5 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
             >
               {isEditing ? (
                 <>
@@ -337,80 +362,107 @@ const ProfilePage = () => {
             </button>
           </div>
 
-          {/* Profile Details */}
+          {/* Profile Content */}
           <div className="p-6">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Personal Information */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-amber-400 border-b border-gray-700 pb-2">
-                  Personal Information
-                </h2>
+              <div className="space-y-6">
+                <div className="relative">
+                  <h2 className="text-xl font-semibold text-amber-400 pb-2 inline-block relative">
+                    <span className="relative z-10 px-1 bg-gray-800">
+                      Personal Information
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-500/30 to-transparent"></span>
+                  </h2>
 
-                <div className="flex items-start gap-4">
-                  <FiUser className="text-amber-400 mt-1" />
-                  <div className="flex-1">
-                    <label className="text-gray-400 text-sm">Full Name</label>
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-amber-400"
-                      />
-                    ) : (
-                      <p className="text-white">{user.name}</p>
-                    )}
+                  <div className="flex items-start gap-4 mt-6 p-4 bg-gray-700/50 rounded-xl hover:bg-gray-700/70 transition">
+                    <div className="p-2 bg-gray-600 rounded-lg text-amber-400">
+                      <FiUser className="text-lg" />
+                    </div>
+                    <div className="flex-1">
+                      <label className="text-gray-400 text-sm font-medium">
+                        Full Name
+                      </label>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400/50 mt-1 transition"
+                        />
+                      ) : (
+                        <p className="text-white mt-1">{user.name}</p>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-start gap-4">
-                  <FiMail className="text-amber-400 mt-1" />
-                  <div className="flex-1">
-                    <label className="text-gray-400 text-sm">Email</label>
-                    <p className="text-white">{user.email}</p>
+                  <div className="flex items-start gap-4 mt-4 p-4 bg-gray-700/50 rounded-xl hover:bg-gray-700/70 transition">
+                    <div className="p-2 bg-gray-600 rounded-lg text-amber-400">
+                      <FiMail className="text-lg" />
+                    </div>
+                    <div className="flex-1">
+                      <label className="text-gray-400 text-sm font-medium">
+                        Email
+                      </label>
+                      <p className="text-white mt-1">{user.email}</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Contact Information */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-amber-400 border-b border-gray-700 pb-2">
-                  Contact Information
-                </h2>
+              <div className="space-y-6">
+                <div className="relative">
+                  <h2 className="text-xl font-semibold text-amber-400 pb-2 inline-block relative">
+                    <span className="relative z-10 px-1 bg-gray-800">
+                      Contact Information
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-500/30 to-transparent"></span>
+                  </h2>
 
-                <div className="flex items-start gap-4">
-                  <FiPhone className="text-amber-400 mt-1" />
-                  <div className="flex-1">
-                    <label className="text-gray-400 text-sm">Phone</label>
-                    {isEditing ? (
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-amber-400"
-                      />
-                    ) : (
-                      <p className="text-white">
-                        {user.phone || "Not provided"}
-                      </p>
-                    )}
+                  <div className="flex items-start gap-4 mt-6 p-4 bg-gray-700/50 rounded-xl hover:bg-gray-700/70 transition">
+                    <div className="p-2 bg-gray-600 rounded-lg text-amber-400">
+                      <FiPhone className="text-lg" />
+                    </div>
+                    <div className="flex-1">
+                      <label className="text-gray-400 text-sm font-medium">
+                        Phone
+                      </label>
+                      {isEditing ? (
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400/50 mt-1 transition"
+                        />
+                      ) : (
+                        <p className="text-white mt-1">
+                          {user.phone || "Not provided"}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Address Section */}
-            <div className="mt-10">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-amber-400 border-b border-gray-700 pb-2">
-                  Shipping Address
-                </h2>
+            <div className="mt-12">
+              <div className="flex items-center justify-between mb-6">
+                <div className="relative">
+                  <h2 className="text-xl font-semibold text-amber-400 pb-2 inline-block relative">
+                    <span className="relative z-10 px-1 bg-gray-800">
+                      Shipping Address
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-500/30 to-transparent"></span>
+                  </h2>
+                </div>
                 {!isEditingAddress && address && (
                   <button
                     onClick={() => setIsEditingAddress(true)}
-                    className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded transition"
+                    className="flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
                   >
                     <FiEdit /> Edit Address
                   </button>
@@ -424,9 +476,11 @@ const ProfilePage = () => {
                   onCancel={() => setIsEditingAddress(false)}
                 />
               ) : (
-                <div className="bg-gray-700 p-6 rounded-lg border border-gray-600">
+                <div className="bg-gray-700 p-6 rounded-xl border border-gray-600 shadow-lg transition-all duration-300 hover:shadow-xl">
                   <div className="flex items-start mb-4">
-                    <FiMapPin className="text-amber-500 text-xl mr-3 mt-1" />
+                    <div className="p-2 bg-gray-600 rounded-lg text-amber-400 mr-3">
+                      <FiMapPin className="text-lg" />
+                    </div>
                     <div>
                       <h3 className="text-xl font-medium text-white">
                         {address.name}
@@ -435,7 +489,7 @@ const ProfilePage = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2 text-gray-300">
+                  <div className="space-y-2 text-gray-300 pl-12">
                     <p>
                       {address.houseName}, {address.streetName}
                     </p>
@@ -445,16 +499,16 @@ const ProfilePage = () => {
                     </p>
                   </div>
 
-                  <div className="flex gap-3 mt-6">
+                  <div className="flex gap-3 mt-6 pl-12">
                     <button
                       onClick={() => setIsEditingAddress(true)}
-                      className="flex-1 flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded transition"
+                      className="flex-1 flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg"
                     >
                       <FiEdit /> Edit
                     </button>
                     <button
                       onClick={handleDeleteAddress}
-                      className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded transition"
+                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white px-4 py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20"
                     >
                       <FiTrash /> Delete
                     </button>
@@ -464,12 +518,24 @@ const ProfilePage = () => {
             </div>
 
             {/* Order History Section */}
-            <div className="mt-10">
-              <h2 className="text-xl font-semibold text-amber-400 border-b border-gray-700 pb-2 mb-4">
-                Recent Orders
-              </h2>
-              <div className="bg-gray-700 rounded-lg p-4">
-                {/* Map through actual orders here when implemented */}
+            <div className="mt-12">
+              <div className="relative mb-6">
+                <h2 className="text-xl font-semibold text-amber-400 pb-2 inline-block relative">
+                  <span className="relative z-10 px-1 bg-gray-800">
+                    Recent Orders
+                  </span>
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-500/30 to-transparent"></span>
+                </h2>
+              </div>
+              <div className="bg-gray-700/50 rounded-xl p-6 border border-gray-600/50">
+                <div className="text-center py-8">
+                  <p className="text-gray-400 mb-4">
+                    You haven't placed any orders yet
+                  </p>
+                  <button className="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20">
+                    Start Shopping
+                  </button>
+                </div>
               </div>
             </div>
           </div>

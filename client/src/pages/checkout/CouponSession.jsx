@@ -103,7 +103,7 @@ function CouponSection({
                     }
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-white">
+                      <span className="font-medium text-orange-300">
                         {coupon.code}
                       </span>
                       <span className="text-amber-300">

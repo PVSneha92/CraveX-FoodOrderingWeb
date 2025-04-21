@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
 import { FiClock, FiTruck, FiSmile } from "react-icons/fi";
@@ -49,7 +49,6 @@ export default function LandPage() {
       name: "Gourmet Pizza",
       image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
       description: "Wood-fired with artisanal toppings",
-      price: "₹499",
       rating: 4.8
     },
     {
@@ -57,7 +56,6 @@ export default function LandPage() {
       name: "Hyderabadi Biriyani",
       image: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a",
       description: "Fragrant basmati rice with tender meat",
-      price: "₹349",
       rating: 4.9
     },
     {
@@ -65,15 +63,13 @@ export default function LandPage() {
       name: "Premium Burger",
       image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
       description: "Angus beef with aged cheddar",
-      price: "₹299",
       rating: 4.7
     },
     {
       id: 4,
       name: "Authentic Shawarma",
-      image: "https://images.unsplash.com/photo-1601050690597-df0568f70950",
+      image: "https://i0.wp.com/chefsbinge.com/wp-content/uploads/2024/09/Chicken-Shawarma-Close-Up-1-of-1.jpg?resize=1000%2C1000&ssl=1",
       description: "Marinated chicken with garlic sauce",
-      price: "₹199",
       rating: 4.6
     },
     {
@@ -81,7 +77,6 @@ export default function LandPage() {
       name: "Truffle Pasta",
       image: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb",
       description: "Handmade pasta with black truffle",
-      price: "₹399",
       rating: 4.9
     },
     {
@@ -89,7 +84,6 @@ export default function LandPage() {
       name: "Sushi Platter",
       image: "https://images.unsplash.com/photo-1580822184713-fc5400e7fe10",
       description: "Chef's selection of 12 pieces",
-      price: "₹599",
       rating: 5.0
     }
   ];
@@ -114,7 +108,6 @@ export default function LandPage() {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero Section */}
       <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-full h-full bg-repeat" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/food.png')" }}></div>
@@ -181,7 +174,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -217,7 +209,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      {/* Popular Dishes Section */}
       <section className="py-20 bg-white" id="menu">
         <div className="container mx-auto px-6">
           <motion.div 
@@ -255,18 +246,12 @@ export default function LandPage() {
                         alt={dish.name} 
                         className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                        <span className="text-white font-bold text-lg">{dish.price}</span>
-                      </div>
                       <div className="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center">
                         ⭐ {dish.rating}
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">{dish.name}</h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{dish.description}</p>
-                    <div className="text-right">
-                      <span className="text-amber-500 font-bold">{dish.price}</span>
-                    </div>
+                    <p className="text-gray-600">{dish.description}</p>
                   </motion.div>
                 </div>
               ))}
@@ -275,7 +260,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full bg-repeat" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/diagonal-striped-brick.png')" }}></div>
@@ -326,7 +310,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <motion.div 
@@ -379,7 +362,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-amber-400 to-amber-500 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full bg-repeat" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/food.png')" }}></div>
