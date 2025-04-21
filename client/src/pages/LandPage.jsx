@@ -310,28 +310,6 @@ export default function LandPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              What Our <span className="text-amber-500">Customers</span> Say
-            </h2>
-            <div className="w-24 h-1.5 bg-amber-400 mx-auto mb-6 rounded-full"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Don't just take our word for it - hear from our satisfied customers
-            </p>
-          </motion.div>
-
-          
-          
-        </div>
-      </section>
 
       <section className="py-20 bg-gradient-to-r from-amber-400 to-amber-500 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
