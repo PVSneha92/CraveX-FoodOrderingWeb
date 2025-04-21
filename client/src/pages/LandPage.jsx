@@ -122,7 +122,7 @@ export default function LandPage() {
           >
             <div className="md:w-1/2 mb-12 md:mb-0">
               <h1 className="text-white font-bold text-5xl lg:text-6xl leading-tight mb-6">
-                <span className="text-amber-300">Gourmet</span> Meals Delivered <br />to Your Door
+                <span className="text-amber-300">Taste </span>that best,<br /> its on time.!
               </h1>
               <p className="text-gray-300 text-xl mb-8 max-w-lg">
                 Experience restaurant-quality dining at home with our chef-prepared meals, delivered fast and fresh.
