@@ -93,11 +93,11 @@ const AdminDashboard = () => {
                   icon: <FiUsers size={20} />,
                   text: "Users",
                 },
-                {
-                  to: "/admin/verify/restaurant",
-                  icon: <FiCheck size={20} />,
-                  text: "Verify",
-                },
+                // {
+                //   to: "/admin/verify/restaurant",
+                //   icon: <FiCheck size={20} />,
+                //   text: "Verify",
+                // },
                 {
                   to: "/admin/all/payments",
                   icon: <LiaRupeeSignSolid size={20} />,
