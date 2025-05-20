@@ -133,7 +133,7 @@ const RestaurantDashboard = () => {
             </div>
             Profile
           </Link>
-          <Link
+          {/* <Link
             to="/restaurant/payments"
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 hover:text-amber-300 transition-all duration-200 group"
             onClick={() => isMobile && setSidebarOpen(false)}
@@ -142,7 +142,7 @@ const RestaurantDashboard = () => {
               <FiCreditCard className="group-hover:text-gray-800" />
             </div>
             Payments
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Logout Button */}
