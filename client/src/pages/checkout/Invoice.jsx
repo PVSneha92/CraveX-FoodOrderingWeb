@@ -89,7 +89,7 @@ function Invoice() {
               {orderData.cartId.items.map((item) => (
                 <tr key={item._id} className="border-b border-gray-600">
                   <td className="px-4 py-2 text-gray-300">
-                    {item.foodId?.name || "Unnamed Item"}
+                    {item.foodId?.name }
                   </td>
                   <td className="px-4 py-2 text-gray-300">{item.quantity}</td>
                   <td className="px-4 py-2 text-gray-300">
