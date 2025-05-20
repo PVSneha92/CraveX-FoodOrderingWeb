@@ -176,7 +176,7 @@ const ContactPage = () => {
                       Phone
                     </h3>
                     <p className="text-gray-300 hover:text-amber-300 transition duration-300">
-                      <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                      <a href="tel:+15551234567">+91 9656396702</a>
                     </p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ const ContactPage = () => {
                       Address
                     </h3>
                     <p className="text-gray-300">123 Restaurant Street</p>
-                    <p className="text-gray-300">Food City, FC 12345</p>
+                    <p className="text-gray-300">Food City</p>
                   </div>
                 </div>
               </div>
