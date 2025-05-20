@@ -57,7 +57,7 @@ function Invoice() {
           </p>
           <p>
             <span className="font-medium">Address:</span>{" "}
-            {`${orderData.deliveryAddress.street}, ${orderData.deliveryAddress.city}, ${orderData.deliveryAddress.state}`}
+            {`${orderData.deliveryAddress.city}, ${orderData.deliveryAddress.state}`}
           </p>
         </div>
       </div>
@@ -79,7 +79,7 @@ function Invoice() {
           <table className="w-full table-auto border-collapse">
             <thead>
               <tr className="bg-gray-600">
-                <th className="px-4 py-2 text-left">Description</th>
+                <th className="px-4 py-2 text-left">Food Name</th>
                 <th className="px-4 py-2 text-left">Quantity</th>
                 <th className="px-4 py-2 text-left">Price</th>
                 <th className="px-4 py-2 text-left">Total</th>
@@ -89,7 +89,7 @@ function Invoice() {
               {orderData.cartId.items.map((item) => (
                 <tr key={item._id} className="border-b border-gray-600">
                   <td className="px-4 py-2 text-gray-300">
-                    {item.foodId?.name }
+                    {item.foodName}
                   </td>
                   <td className="px-4 py-2 text-gray-300">{item.quantity}</td>
                   <td className="px-4 py-2 text-gray-300">
@@ -125,8 +125,9 @@ function Invoice() {
           Continue Ordering
         </button>
       </div>
-    </div>
+    </div>  
   );
 }
 
 export default Invoice;
+
